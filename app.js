@@ -17,8 +17,7 @@ let server = http.createServer(function (req, res) {
 
   if (url == '/quote') {
     res.writeHead(200);
-    res.send(quotes[Math.floor(Math.random() * quotes.length)]);
-    res.end();
+    res.end(quotes[Math.floor(Math.random() * quotes.length)]);
   } else if (url == '/health') {
     res.writeHead(200);
     res.end();
