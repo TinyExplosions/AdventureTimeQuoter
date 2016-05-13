@@ -21,6 +21,7 @@ let server = http.createServer(function (req, res) {
     res.end(JSON.stringify(quotes[Math.floor(Math.random() * quotes.length)]));
   } else if (url.indexOf('/quote/') == 0) {
     var character = url.split('/quote/')[1];
+    character= character.replace(/%20/g, " ");
     var charArray = quotes.filter(function(quote) {
         return quote.character.toUpperCase() === character.toUpperCase()
     });
