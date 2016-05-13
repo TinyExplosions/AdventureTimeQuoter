@@ -3,7 +3,8 @@ const http         = require('http'),
       path         = require('path'),
       contentTypes = require('./utils/content-types'),
       sysInfo      = require('./utils/sys-info'),
-      env          = process.env;
+      env          = process.env,
+      quotes       = require('./data/quotes.json');
 
 let server = http.createServer(function (req, res) {
   let url = req.url;
@@ -14,7 +15,11 @@ let server = http.createServer(function (req, res) {
   // IMPORTANT: Your application HAS to respond to GET /health with status 200
   //            for OpenShift health monitoring
 
-  if (url == '/health') {
+  if (url == '/quote') {
+    res.writeHead(200);
+    res.send(quotes[Math.floor(Math.random() * quotes.length)]);
+    res.end();
+  } else if (url == '/health') {
     res.writeHead(200);
     res.end();
   } else if (url.indexOf('/info/') == 0) {
