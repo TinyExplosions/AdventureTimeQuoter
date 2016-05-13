@@ -17,6 +17,7 @@ let server = http.createServer(function (req, res) {
 
   if (url == '/quote') {
     res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Cache-Control', 'no-cache, no-store');
     res.end(JSON.stringify(quotes[Math.floor(Math.random() * quotes.length)]));
   } else if (url == '/health') {
     res.writeHead(200);
