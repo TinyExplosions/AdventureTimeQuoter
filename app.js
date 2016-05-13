@@ -16,9 +16,21 @@ let server = http.createServer(function (req, res) {
   //            for OpenShift health monitoring
 
   if (url == '/quote') {
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.setHeader('Cache-Control', 'no-cache, no-store');
     res.end(JSON.stringify(quotes[Math.floor(Math.random() * quotes.length)]));
+  } else if (url.indexOf('/quote/') == 0) {
+    var character = url.split('/quote/')[1];
+    var charArray = quotes.filter(function(quote) {
+        return quote.character.toUpperCase() === character.toUpperCase()
+    });
+    if(charArray.length === 0) {
+      res.writeHead(404);
+      res.end("No quote found");
+    }
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-cache, no-store');
+    res.end(JSON.stringify(charArray[Math.floor(Math.random() * charArray.length)]));
   } else if (url == '/health') {
     res.writeHead(200);
     res.end();
