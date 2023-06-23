@@ -56,6 +56,8 @@ let server = http.createServer(function (req, res) {
   }
 });
 
-server.listen(env.NODE_PORT || 3000, env.NODE_IP || 'localhost', function () {
-  console.log(`Application worker ${process.pid} started...`);
+server.listen(env.NODE_PORT || 8080, env.NODE_IP || 'localhost', function () {
+  console.log('I am listening...')
+  console.log('Application worker ${process.pid} started...');
 });
+
